@@ -1,0 +1,722 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Междугороднее такси · цена до выезда</title>
+<meta name="description" content="Междугороднее такси из вашего города: цена за маршрут называется до выезда, подтверждение в мессенджере, машина нужного класса к назначенному времени.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:site_name" content="Ваше такси">
+<meta property="og:title" content="Междугороднее такси · цена до выезда">
+<meta property="og:description" content="Назовите маршрут - цену за него назовём до выезда и подтвердим в мессенджере. Машина нужного класса подаётся к назначенному времени.">
+<meta property="og:url" content="https://matros-smg.github.io/taksi-3275867-demo/">
+<meta property="og:image" content="https://matros-smg.github.io/taksi-3275867-demo/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" as="image" href="assets/hero-m.webp" media="(max-width: 860px)" fetchpriority="high">
+<link rel="preload" as="image" href="assets/hero.webp" media="(min-width: 861px)" fetchpriority="high">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%277%27 fill=%27%230b1320%27/%3E%3Crect x=%274%27 y=%2711%27 width=%2724%27 height=%2711%27 rx=%275%27 fill=%27%23f3ece0%27/%3E%3Crect x=%2724%27 y=%2713%27 width=%273%27 height=%277%27 rx=%271%27 fill=%27%23ffb81c%27/%3E%3C/svg%3E">
+<link rel="stylesheet" href="vibe.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"TaxiService","name":"Ваше такси","description":"Междугороднее такси: цена за маршрут называется до выезда, подтверждение в мессенджере, машина нужного класса к назначенному времени.","url":"https://matros-smg.github.io/taksi-3275867-demo/","image":"https://matros-smg.github.io/taksi-3275867-demo/assets/og.jpg","areaServed":"Россия","serviceType":"Междугороднее такси"}
+</script>
+<style>
+  /* ---- тема: ночной графит + янтарь ------------------------------------------ */
+  .v-page {
+    --v-canvas: #0b1320; --v-surface: #121c2e;
+    --v-ink: #f3ece0; --v-ink-soft: #aab3c2;
+    --v-accent: #ffb81c; --v-accent-ink: #0b1320;
+    --v-font-display: "Rubik", "Arial", system-ui, sans-serif;
+    --v-font-text: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+    --v-shadow-color: 2 5 12;
+    --v-radius: 10px;
+    --v-section: clamp(3.5rem, 8vw, 7rem);
+    --v-display-weight: 400;
+    --v-t-2xl: clamp(1.7rem, 1.35rem + 1.7vw, 2.6rem);
+    --v-t-3xl: clamp(1.95rem, 1.4rem + 2.6vw, 3.25rem);
+    --v-track-tight: -0.02em;
+    --v-e1: 0 1px 2px rgb(var(--v-shadow-color) / .3), 0 8px 22px rgb(var(--v-shadow-color) / .3);
+    --v-e2: 0 2px 6px rgb(var(--v-shadow-color) / .35), 0 22px 54px rgb(var(--v-shadow-color) / .5);
+  }
+  html, body { background: #0b1320; }
+  .v-page .v-lede { font-weight: 400; }
+  .v-page .v-label { font-weight: 500; }
+  .v-page .v-btn { font-size: var(--v-t-base); font-weight: 600; }
+  .v-page .v-display { font-weight: 400; text-wrap: balance; }
+  .v-page h3 { font-weight: 500; }
+  .v-btn--ghost { background: transparent; color: var(--v-ink); box-shadow: inset 0 0 0 1px var(--v-hair-strong); }
+  .v-btn--ghost:hover { box-shadow: inset 0 0 0 1px var(--v-accent); }
+
+  /* ---- шапка: плотная 96% с 8 px прокрутки, около 60 px ------------------------- */
+  .bar { position: fixed; inset: 0 0 auto 0; z-index: 30; display: flex; align-items: center; justify-content: space-between;
+    padding: var(--v-2) var(--v-gutter); gap: var(--v-4);
+    background: linear-gradient(to bottom, rgb(11 19 32 / .9), rgb(11 19 32 / 0));
+    transition: background-color .3s var(--v-ease-out), box-shadow .3s var(--v-ease-out); }
+  .bar.is-scrolled { background: color-mix(in oklab, var(--v-canvas) 96%, transparent); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); box-shadow: 0 1px 0 var(--v-hair); }
+  .bar__left { display: flex; align-items: center; gap: var(--v-3); min-width: 0; }
+  .bar__mark { font-family: var(--v-font-display); font-weight: 500; font-size: var(--v-t-lg); letter-spacing: -.01em; text-decoration: none;
+    display: inline-flex; align-items: center; gap: .5em; min-height: 44px; white-space: nowrap; }
+  .bar__mark i { width: 1.15em; height: .62em; border-radius: .3em; background: var(--v-ink); display: inline-block; position: relative; }
+  .bar__mark i::after { content: ""; position: absolute; right: .08em; top: 22%; bottom: 22%; width: .16em; border-radius: .08em; background: var(--v-accent); }
+  .demo { font: 500 .7rem/1 var(--v-font-text); letter-spacing: .06em; text-transform: uppercase; padding: 5px 9px 4px; border: 1px solid var(--v-accent); border-radius: 999px; color: var(--v-accent); white-space: nowrap; }
+  .bar__right { display: flex; align-items: center; gap: var(--v-4); }
+  .bar__tel { text-decoration: none; font-weight: 600; font-size: var(--v-t-sm); color: var(--v-ink); display: inline-flex; align-items: center; min-height: 44px; padding: 0 var(--v-2); white-space: nowrap; }
+  @media (min-width: 701px) { .bar .v-btn { min-height: 44px; padding: 0 1.2em; font-size: .95rem; } }
+  @media (max-width: 700px) {
+    .bar__tel, .bar .v-btn { display: none; } /* на телефоне действие - в липкой панели внизу */
+    .bar__right { gap: var(--v-2); }
+    .bar__mark { font-size: 1.05rem; }
+  }
+  @media (max-width: 359px) { .demo { padding: 4px 6px 3px; } .bar__mark { font-size: .95rem; } }
+
+  /* ---- hero: ночная трасса, два плана --------------------------------------------- */
+  .hero__back img, .hero__card img { position: absolute; max-width: none; }
+  .hero__back img { width: 116%; height: 116%; left: -8%; top: -8%; object-fit: cover; }
+  .hero__card { --w: clamp(180px, 17vw, 290px); --r: clamp(2rem, 7vw, 8rem); --b: 12vh; }
+  .hero__card img { width: var(--w); height: calc(var(--w) * 4 / 3); right: var(--r); bottom: var(--b); object-fit: cover;
+    border-radius: var(--v-radius); box-shadow: 0 30px 60px rgb(0 0 0 / .55), var(--v-edge); transform: rotate(-3deg); }
+  .hero__scrim { position: absolute; inset: 0; z-index: 2; pointer-events: none;
+    background: radial-gradient(120% 95% at 0% 100%, rgb(11 19 32 / .92) 0%, rgb(11 19 32 / .66) 38%, transparent 70%); }
+  .hero__floor { position: absolute; inset: auto 0 0 0; height: 30%; z-index: 2; pointer-events: none;
+    background: linear-gradient(to top, var(--v-canvas) 0%, rgb(11 19 32 / .55) 45%, transparent 100%); }
+  .hero__copy { bottom: clamp(5.5rem, 15vh, 10rem); max-width: min(46rem, 86vw); }
+  .hero__label { display: block; margin-bottom: var(--v-4); color: var(--v-accent); }
+  .hero__copy .v-display { font-size: clamp(2.2rem, min(1.2rem + 2.8vw, 6.8svh), 3.9rem); line-height: 1.02; }
+  .hero__copy .v-lede { margin-top: var(--v-5); color: var(--v-ink); max-width: 42ch; }
+  .hero__cta { display: flex; flex-wrap: wrap; align-items: center; gap: var(--v-4) var(--v-6); margin-top: var(--v-6); }
+  .hero__tel { text-decoration: none; color: var(--v-ink); font-size: var(--v-t-sm); display: inline-flex; align-items: center; min-height: 44px; gap: .35em; }
+  .hero__tel b { font-weight: 600; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .18em; }
+  .hero__note { position: absolute; z-index: 3; right: var(--v-gutter); top: clamp(5rem, 14vh, 9rem); text-align: right; display: grid; gap: .3em;
+    padding: var(--v-4) var(--v-5); border-radius: var(--v-radius); background: rgb(18 28 46 / .82); box-shadow: var(--v-e1), var(--v-edge); }
+  .hero__note .v-nums { font-family: var(--v-font-display); font-weight: 500; font-size: var(--v-t-lg); letter-spacing: -.01em; color: var(--v-accent); }
+  .hero__note .hero__int { color: var(--v-ink); font-size: var(--v-t-sm); }
+  @media (max-width: 860px) {
+    .hero__scrim { background: linear-gradient(to top, rgb(11 19 32 / .96) 0%, rgb(11 19 32 / .8) 40%, transparent 68%); }
+    .hero__card { --w: 32vw; --r: 5vw; --b: auto; }
+    .hero__card img { bottom: auto; top: 12vh; box-shadow: 0 18px 36px rgb(0 0 0 / .6); }
+    .hero__note { display: none; }
+    .hero__copy { bottom: clamp(2.5rem, 6vh, 4rem); }
+    .hero__copy .v-display { font-size: clamp(1.75rem, 7.6vw, 2.4rem); }
+    .hero__copy .v-lede { font-size: var(--v-t-base); margin-top: var(--v-4); }
+    .hero__label { margin-bottom: var(--v-3); }
+    .hero__cta { margin-top: var(--v-5); gap: var(--v-2) var(--v-5); }
+  }
+  @media (max-width: 600px) and (max-height: 700px) { .hero__card { --w: 26vw; } .hero__card img { top: 10vh; } }
+
+  /* ---- куда едем: нумерованный список поездок, карточка «Как считаем» ---------------- */
+  .poka__head { max-width: 60rem; margin-bottom: var(--v-7); }
+  .poka__head .v-body { margin-top: var(--v-4); }
+  .trips { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--v-8); counter-reset: trip; border-bottom: 1px solid var(--v-hair); }
+  .trips li { counter-increment: trip; display: grid; grid-template-columns: 2.6rem 1fr; column-gap: var(--v-4); row-gap: var(--v-2); padding: var(--v-5) 0; border-top: 1px solid var(--v-hair); align-content: start; }
+  .trips li::before { content: counter(trip, decimal-leading-zero); grid-row: 1 / span 2; font-family: var(--v-font-display); font-weight: 500; font-size: var(--v-t-sm); color: var(--v-accent); padding-top: .45em; font-variant-numeric: tabular-nums; }
+  .trips h3 { font-family: var(--v-font-display); font-weight: 500; font-size: var(--v-t-xl); letter-spacing: var(--v-track-normal); line-height: 1.1; text-wrap: balance; }
+  .trips p { color: var(--v-ink-soft); max-width: 46ch; text-wrap: pretty; }
+  .turn { margin-top: var(--v-7); display: grid; grid-template-columns: minmax(14rem, .8fr) 1.6fr; gap: var(--v-2) var(--v-8); align-items: start;
+    padding: var(--v-6); border-radius: var(--v-radius); background: var(--v-surface); box-shadow: var(--v-e1), var(--v-edge); }
+  .turn .v-label { color: var(--v-accent); padding-top: .4em; }
+  .turn__text { font-family: var(--v-font-display); font-weight: 400; font-size: var(--v-t-xl); line-height: 1.25; letter-spacing: var(--v-track-normal); text-wrap: pretty; max-width: 34ch; }
+  .poka__fig { position: relative; margin-top: var(--v-7); aspect-ratio: 2.3 / 1; overflow: hidden; }
+  .poka__fig img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 70%; }
+  .poka__fig figcaption, .prices__fig figcaption, .promise__fig figcaption { position: absolute; left: var(--v-gutter); right: var(--v-gutter); bottom: var(--v-5); z-index: 1; font-size: var(--v-t-sm); color: #f3ece0; max-width: 60ch; }
+  .poka__fig::after, .prices__fig::after, .promise__fig::after { content: ""; position: absolute; inset: auto 0 0 0; height: 55%; background: linear-gradient(to top, rgb(7 12 22 / .85), rgb(7 12 22 / .35) 50%, transparent); pointer-events: none; }
+  @media (max-width: 860px) {
+    .turn { grid-template-columns: 1fr; gap: var(--v-2); padding: var(--v-5); }
+    .trips { grid-template-columns: 1fr; }
+    .trips li { grid-template-columns: 2.1rem 1fr; padding: var(--v-4) 0; }
+    .trips h3 { font-size: var(--v-t-lg); }
+    .trips p { font-size: .95rem; }
+    .turn__text { font-size: var(--v-t-lg); }
+    .poka__fig { aspect-ratio: 4 / 3; margin-top: var(--v-7); }
+    .poka__fig figcaption { left: var(--v-5); right: var(--v-5); }
+  }
+
+  /* ---- фирменный ход: салон сверху, в машину садятся пассажиры и грузится багаж ---------- */
+  .kz { display: grid; grid-template-columns: 1.1fr .9fr; grid-template-rows: auto 1fr auto; column-gap: var(--v-9); height: 100%;
+    padding: clamp(4.5rem, 12vh, 7rem) var(--v-gutter) clamp(2.5rem, 8vh, 5rem); }
+  .kz__head { grid-column: 1 / -1; max-width: 60rem; }
+  .kz__head .v-lede { margin-top: var(--v-3); max-width: 46ch; }
+  .kz__car { align-self: center; padding: var(--v-4) 0; }
+  .kz__tiers { align-self: center; display: grid; }
+  .kz__tiers > .tier { grid-area: 1 / 1; }
+  .kz__after { grid-column: 2; display: flex; align-items: center; gap: var(--v-5); flex-wrap: wrap; padding-top: var(--v-4); }
+  .kz__hint { font-size: var(--v-t-sm); color: var(--v-ink-soft); max-width: 36ch; }
+  .tier { display: grid; gap: var(--v-3); }
+  .tier__class { display: inline-flex; align-items: center; gap: .55em; font-size: var(--v-t-xs); letter-spacing: var(--v-track-wide); text-transform: uppercase; color: var(--v-ink-soft); font-weight: 500; }
+  .tier__class i { width: .6em; height: .6em; border-radius: 50%; background: var(--v-accent); }
+  .tier h3 { font-family: var(--v-font-display); font-weight: 400; font-size: var(--v-t-2xl); line-height: 1.05; letter-spacing: var(--v-track-tight); text-wrap: balance; }
+  .tier__note { color: var(--v-ink-soft); max-width: 44ch; text-wrap: pretty; }
+  .tier__note b { color: var(--v-ink); font-weight: 600; }
+  .tier__price { display: grid; grid-template-columns: auto auto; gap: var(--v-2) var(--v-6); justify-content: start; padding-top: var(--v-3); border-top: 1px solid var(--v-hair); }
+  .tier__price span { display: grid; gap: .1em; }
+  .tier__price b { font-weight: 500; font-size: var(--v-t-lg); color: var(--v-accent); white-space: nowrap; }
+  .tier__price small { font-size: var(--v-t-sm); color: var(--v-ink-soft); }
+
+  /* салон: единица - 1% ширины контейнера (cqw); машина смотрит вправо, третий ряд и длинный кузов появляются у минивэна */
+  .car { position: relative; width: 100%; aspect-ratio: 100 / 40; container-type: inline-size;
+    --s3: clamp(0, calc((var(--v-p, 0) - .55) * 18), 1);
+    --ext: calc(var(--s3) * 20cqw); }
+  .car__w { position: absolute; width: 10cqw; height: 3.4cqw; border-radius: 1cqw; background: var(--v-ink); opacity: .85; }
+  .car__w--f1, .car__w--f2 { right: 10cqw; } .car__w--r1, .car__w--r2 { right: calc(54cqw + var(--ext)); }
+  .car__w--f1, .car__w--r1 { top: 2.2cqw; } .car__w--f2, .car__w--r2 { top: 34.4cqw; }
+  .car__body { position: absolute; right: 2cqw; top: 4cqw; height: 32cqw; width: calc(74cqw + var(--ext)); box-sizing: border-box;
+    border: .7cqw solid var(--v-ink); border-radius: 4cqw 13cqw 13cqw 4cqw / 4cqw 9cqw 9cqw 4cqw; background: var(--v-surface); box-shadow: 0 2cqw 5cqw rgb(0 0 0 / .45); }
+  .car__glass { position: absolute; right: 13cqw; top: 2.6cqw; bottom: 2.6cqw; width: 4.4cqw; border-radius: 1.6cqw 1.6cqw 1.6cqw 1.6cqw; transform: skewY(0deg);
+    background: color-mix(in oklab, var(--v-accent) 22%, var(--v-surface)); box-shadow: inset 0 0 0 .4cqw var(--v-ink); }
+  .car__lamp { position: absolute; right: -.4cqw; width: 1.8cqw; height: 4.6cqw; border-radius: .9cqw; background: var(--v-accent); box-shadow: 0 0 3cqw rgb(255 184 28 / .55); }
+  .car__lamp--a { top: 3cqw; } .car__lamp--b { bottom: 3cqw; }
+  .car__trunk { position: absolute; left: 1.6cqw; top: 2cqw; bottom: 2cqw; width: 22cqw; border-radius: 1.4cqw; border: .3cqw dashed var(--v-hair-strong); box-sizing: border-box; }
+  .seat { position: absolute; width: 7cqw; height: 8cqw; right: var(--x); top: var(--y); border-radius: 1.4cqw; box-sizing: border-box;
+    background: color-mix(in oklab, var(--v-ink) 13%, var(--v-surface)); box-shadow: inset 0 0 0 .3cqw color-mix(in oklab, var(--v-ink) 30%, transparent); }
+  .seat--r3 { opacity: var(--s3); }
+  .seat::after, .pax::after { content: ""; }
+  .pax { --on: clamp(0, calc((var(--v-p, 0) - var(--t, 0)) * 14), 1); position: absolute; width: 7cqw; height: 8cqw; right: var(--x); top: var(--y);
+    opacity: var(--on); transform: translateX(calc((1 - var(--on)) * 5cqw)) scale(calc(.7 + .3 * var(--on))); }
+  .pax::before { content: ""; position: absolute; left: 1.2cqw; top: .8cqw; width: 4.6cqw; height: 6.4cqw; border-radius: 2.3cqw; background: color-mix(in oklab, var(--v-ink) 78%, var(--v-surface)); }
+  .pax::after { position: absolute; left: 1.9cqw; top: 2.4cqw; width: 3.2cqw; height: 3.2cqw; border-radius: 50%; background: var(--v-ink); }
+  .pax--drv { --on: 1; opacity: 1; transform: none; }
+  .pax--drv::before { background: color-mix(in oklab, var(--v-accent) 70%, var(--v-surface)); }
+  .pax--drv::after { background: var(--v-accent); }
+  .bag { --on: clamp(0, calc((var(--v-p, 0) - var(--t, 0)) * 14), 1); position: absolute; width: 9cqw; height: 7cqw; left: var(--x); top: var(--y); border-radius: 1cqw;
+    background: color-mix(in oklab, var(--v-accent) 62%, var(--v-surface)); box-shadow: inset 0 0 0 .3cqw rgb(0 0 0 / .35);
+    opacity: var(--on); transform: translateX(calc((1 - var(--on)) * -12cqw)); }
+  .bag::before { content: ""; position: absolute; left: 4cqw; top: 0; bottom: 0; width: .6cqw; background: rgb(11 19 32 / .5); }
+  .bag::after { content: ""; position: absolute; right: .9cqw; top: 2.7cqw; width: 1.2cqw; height: 1.6cqw; border-radius: .3cqw; background: rgb(11 19 32 / .65); }
+  .car__meter { margin-top: var(--v-3); display: flex; gap: var(--v-5); font-size: var(--v-t-sm); color: var(--v-ink-soft); }
+  .car__meter b { font-family: var(--v-font-display); font-weight: 500; font-size: var(--v-t-xl); color: var(--v-ink); line-height: 1; margin-right: .2em; font-variant-numeric: tabular-nums; }
+  .kz__legend { margin-top: var(--v-3); font-size: var(--v-t-xs); color: var(--v-ink-soft); letter-spacing: var(--v-track-wide); text-transform: uppercase; }
+  @media (max-width: 1100px) { .kz { column-gap: var(--v-7); } .tier h3 { font-size: var(--v-t-xl); } }
+  @media (max-width: 860px) {
+    .kz { grid-template-columns: 1fr; grid-template-rows: auto auto 1fr auto; row-gap: var(--v-4); padding: clamp(4.5rem, 11vh, 6rem) var(--v-gutter) clamp(1.5rem, 5vh, 3rem); }
+    .kz__head { max-width: none; }
+    .kz__head .v-display { font-size: var(--v-t-xl); }
+    .kz__head .v-lede { font-size: var(--v-t-base); }
+    .kz__car { width: min(100%, 62vh); padding: var(--v-2) 0 0; align-self: start; }
+    .kz__legend { display: none; }
+    .kz__tiers { align-self: start; }
+    .tier h3 { font-size: var(--v-t-xl); }
+    .tier__note { font-size: var(--v-t-sm); }
+    .tier__price b { font-size: var(--v-t-base); }
+    .kz__after { display: none; }
+  }
+  @media (max-width: 600px) and (max-height: 760px) { .kz__head .v-lede { display: none; } .tier__note { max-width: none; } }
+
+  /* ---- что в цене ---------------------------------------------------------------- */
+  .prices { display: grid; grid-template-columns: 1.35fr .65fr; gap: var(--v-9); align-items: start; }
+  .plist li { display: grid; grid-template-columns: 1fr auto; gap: var(--v-1) var(--v-5); padding: var(--v-4) 0; border-top: 1px solid var(--v-hair); align-items: baseline; }
+  .plist li:last-child { border-bottom: 1px solid var(--v-hair); }
+  .plist .name { font-family: var(--v-font-display); font-weight: 500; font-size: var(--v-t-lg); letter-spacing: var(--v-track-normal); line-height: 1.15; }
+  .plist .note { grid-column: 1; font-size: var(--v-t-sm); color: var(--v-ink-soft); max-width: 52ch; }
+  .plist .price { grid-column: 2; grid-row: 1 / span 2; align-self: start; font-weight: 500; font-size: var(--v-t-base); color: var(--v-accent); white-space: nowrap; text-align: right; }
+  .plist .price small { display: block; font-weight: 400; font-size: var(--v-t-xs); color: var(--v-ink-soft); }
+  .prices__incl { font-size: var(--v-t-sm); color: var(--v-ink-soft); max-width: 62ch; }
+  .prices__incl b { color: var(--v-ink); font-weight: 600; }
+  .prices__fig { position: relative; aspect-ratio: 3 / 4; border-radius: var(--v-radius); overflow: hidden; box-shadow: var(--v-e2), var(--v-edge); margin-top: var(--v-8); }
+  .prices__fig img { position: absolute; left: 0; top: -8%; width: 100%; height: 116%; object-fit: cover; object-position: 50% 50%; max-width: none; }
+  .prices__fig figcaption { left: var(--v-5); right: var(--v-5); }
+  @media (max-width: 860px) {
+    .prices { grid-template-columns: 1fr; gap: var(--v-7); }
+    .prices__fig { aspect-ratio: 4 / 3; margin-top: 0; }
+    .plist .name { font-size: var(--v-t-base); }
+    .plist li { grid-template-columns: 1fr; gap: var(--v-1); }
+    .plist .price { grid-column: 1; grid-row: auto; text-align: left; white-space: normal; padding-top: var(--v-1); }
+    .plist .price small { display: inline; margin-left: .4em; }
+  }
+
+  /* ---- дорога: сцена с репликами и строкой маршрута ------------------------------------- */
+  .road__img img { width: 112%; height: 112%; left: -6%; top: -6%; object-fit: cover; object-position: 70% 50%; }
+  .road__scrim { position: absolute; inset: 0; z-index: 2; pointer-events: none;
+    background: radial-gradient(115% 85% at 0% 0%, rgb(11 19 32 / .9) 0%, rgb(11 19 32 / .58) 40%, transparent 70%); }
+  .road__copy { max-width: 46rem; top: clamp(5.5rem, 14vh, 9rem); }
+  .road__copy .v-label { display: block; margin-bottom: var(--v-3); color: var(--v-accent); }
+  .road__copy .v-display--lg { font-size: clamp(1.9rem, 1.3rem + 2.6vw, 3.4rem); }
+  .road__copy .v-lede { margin-top: var(--v-4); max-width: 42ch; color: var(--v-ink); }
+  .route { position: absolute; z-index: 3; left: var(--v-gutter); right: var(--v-gutter); bottom: clamp(2.5rem, 9vh, 6rem); height: 3.2rem; pointer-events: none; }
+  .route__line { position: absolute; left: 1.6rem; right: 1.6rem; top: 1.55rem; height: 2px; background: color-mix(in oklab, var(--v-ink) 45%, transparent); }
+  .route__end { position: absolute; top: 0; width: 3.2rem; height: 3.2rem; border-radius: 50%; display: grid; place-items: center; font-family: var(--v-font-display); font-weight: 500; font-size: var(--v-t-sm);
+    background: var(--v-canvas); color: var(--v-ink); box-shadow: inset 0 0 0 2px var(--v-ink); }
+  .route__end--b { right: 0; background: var(--v-accent); color: var(--v-accent-ink); box-shadow: inset 0 0 0 2px var(--v-accent); }
+  .route__track { position: absolute; left: 3.6rem; right: 3.6rem; top: 0; height: 100%; }
+  .mini { position: absolute; top: .4rem; left: calc(var(--v-p, 0) * (100% - 3.6rem)); width: 3.6rem; height: 2rem; }
+  .mini__body { position: absolute; left: 0; right: 0; bottom: .45rem; height: .95rem; border-radius: .45rem .75rem .45rem .45rem; background: color-mix(in oklab, var(--v-ink) 22%, var(--v-surface)); box-shadow: inset 0 0 0 2px var(--v-ink); }
+  .mini__roof { position: absolute; left: .85rem; width: 1.6rem; bottom: 1.2rem; height: .62rem; border-radius: .5rem .55rem 0 0; background: var(--v-surface); box-shadow: inset 0 0 0 2px var(--v-ink); }
+  .mini__lamp { position: absolute; right: -.08rem; bottom: .85rem; width: .38rem; height: .3rem; border-radius: .1rem; background: var(--v-accent); box-shadow: 0 0 .8rem rgb(255 184 28 / .8); }
+  .mini i { position: absolute; bottom: 0; width: .7rem; height: .7rem; border-radius: 50%; background: var(--v-ink); box-shadow: inset 0 0 0 2px var(--v-ink), inset 0 0 0 3px var(--v-canvas); }
+  .mini i:first-of-type { left: .5rem; } .mini i:last-of-type { right: .6rem; }
+  @media (max-width: 860px) {
+    .road__scrim { background: linear-gradient(to bottom, rgb(11 19 32 / .96) 0%, rgb(11 19 32 / .84) 42%, transparent 70%); }
+    .road__copy { top: clamp(4.5rem, 11vh, 7rem); left: var(--v-gutter); right: var(--v-gutter); max-width: none; }
+    .road__copy .v-display--lg { font-size: var(--v-t-xl); }
+    .road__copy .v-lede { font-size: var(--v-t-base); }
+    .route { bottom: calc(5.5rem + env(safe-area-inset-bottom)); }
+  }
+
+  /* ---- приехали: четыре обещания и фото ------------------------------------------------- */
+  .promise { display: grid; grid-template-columns: 1fr 1fr; gap: var(--v-8); align-items: center; }
+  .promise__facts li { padding: var(--v-5) 0; border-top: 1px solid var(--v-hair); display: grid; gap: var(--v-1); }
+  .promise__facts li:last-child { border-bottom: 1px solid var(--v-hair); }
+  .promise__facts strong { font-family: var(--v-font-display); font-weight: 500; font-size: var(--v-t-lg); letter-spacing: var(--v-track-normal); line-height: 1.15; }
+  .promise__facts span { color: var(--v-ink-soft); font-size: var(--v-t-sm); max-width: 46ch; }
+  .promise__fig { position: relative; border-radius: var(--v-radius); overflow: hidden; aspect-ratio: 16 / 11; box-shadow: var(--v-e2), var(--v-edge); }
+  .promise__fig img { width: 100%; height: 100%; object-fit: cover; }
+  .promise__fig figcaption { left: var(--v-5); right: var(--v-5); }
+  .promise .v-stack .v-display { margin-bottom: var(--v-2); }
+  @media (max-width: 860px) { .promise { grid-template-columns: 1fr; gap: var(--v-6); } .promise__fig { aspect-ratio: 4 / 3; } }
+
+  /* ---- заявка: форма поездки собирает сообщение в мессенджер ------------------------------- */
+  .close { min-height: 86svh; display: grid; grid-template-rows: 1fr auto; padding: clamp(6rem, 14vh, 9rem) var(--v-gutter) 2.5rem;
+    background: radial-gradient(60rem 40rem at calc(var(--v-mx, .5) * 100%) calc(var(--v-my, .5) * 100%), rgb(255 184 28 / .10), transparent 60%); }
+  .close__inner { align-self: center; display: grid; grid-template-columns: .85fr 1.15fr; gap: var(--v-9); align-items: start; padding-bottom: var(--v-9); }
+  .close__inner .v-display { margin-bottom: var(--v-5); }
+  .close__inner .v-lede { max-width: 38ch; }
+  .close__tel { font-family: var(--v-font-display); font-weight: 500; font-size: var(--v-t-xl); text-decoration: none; display: inline-flex; align-items: center; min-height: 44px; color: var(--v-ink); letter-spacing: -.01em; margin-top: var(--v-5); }
+  .close__meta { display: grid; gap: var(--v-3); color: var(--v-ink-soft); margin-top: var(--v-6); }
+  .close__meta b { color: var(--v-ink); font-weight: 600; display: block; font-size: var(--v-t-xs); letter-spacing: var(--v-track-wide); text-transform: uppercase; margin-bottom: .2em; }
+  .foot { display: flex; justify-content: space-between; gap: var(--v-4); padding: var(--v-6) 0 0; border-top: 1px solid var(--v-hair); font-size: var(--v-t-xs); color: var(--v-ink-soft); flex-wrap: wrap; }
+  .zk { display: grid; gap: var(--v-5); padding: var(--v-6); border-radius: var(--v-radius); background: var(--v-surface); box-shadow: var(--v-e2), var(--v-edge); }
+  .zk__row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--v-4); align-items: start; }
+  .zk__row--time { grid-template-columns: minmax(8.5rem, .6fr) 1.4fr; }
+  .zk__f { display: grid; gap: var(--v-2); border: 0; padding: 0; margin: 0; min-width: 0; }
+  .zk__f > span, .zk__f > legend { font-size: var(--v-t-xs); letter-spacing: var(--v-track-wide); text-transform: uppercase; color: var(--v-ink-soft); font-weight: 500; padding: 0; }
+  .zk input[type=text], .zk input[type=time] { width: 100%; min-height: 48px; padding: 0 var(--v-3); box-sizing: border-box; border-radius: 8px; border: 0; color: var(--v-ink); font: 400 1rem var(--v-font-text);
+    background: color-mix(in oklab, var(--v-ink) 7%, var(--v-surface)); box-shadow: inset 0 0 0 1px var(--v-hair-strong); color-scheme: dark; }
+  .zk input::placeholder { color: color-mix(in oklab, var(--v-ink-soft) 80%, transparent); }
+  .zk input:focus-visible { outline: 2px solid var(--v-accent); outline-offset: 1px; }
+  .zk input.is-bad { box-shadow: inset 0 0 0 2px #ff8a65; }
+  .zk__chips { display: flex; flex-wrap: wrap; gap: var(--v-2); }
+  .opt { position: relative; }
+  .opt input { position: absolute; opacity: 0; inset: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; }
+  .opt span { display: inline-flex; align-items: center; min-height: 44px; padding: 0 var(--v-4); border-radius: 999px; font-size: var(--v-t-sm); color: var(--v-ink); cursor: pointer;
+    box-shadow: inset 0 0 0 1px var(--v-hair-strong); transition: background-color .2s var(--v-ease-out), color .2s var(--v-ease-out); }
+  .opt input:checked + span { background: var(--v-accent); color: var(--v-accent-ink); box-shadow: none; font-weight: 600; }
+  .opt input:focus-visible + span { outline: 2px solid var(--v-accent); outline-offset: 2px; }
+  .zk__bubble { white-space: pre-line; padding: var(--v-4) var(--v-5); border-radius: 14px 14px 14px 4px; background: color-mix(in oklab, var(--v-accent) 12%, var(--v-surface)); box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--v-accent) 40%, transparent);
+    font-size: var(--v-t-sm); line-height: 1.5; color: var(--v-ink); }
+  .zk__send { display: flex; flex-wrap: wrap; gap: var(--v-3) var(--v-4); }
+  .zk__hint { font-size: var(--v-t-sm); color: var(--v-ink-soft); }
+  .zk__hint[hidden] { display: none; }
+  .zk__hint b { color: var(--v-accent); font-weight: 600; }
+  @media (max-width: 860px) {
+    .close { min-height: 0; padding: clamp(5rem, 12vh, 7rem) var(--v-gutter) calc(5.5rem + env(safe-area-inset-bottom)); }
+    .close__inner { grid-template-columns: 1fr; gap: var(--v-7); padding-bottom: var(--v-8); }
+    .close__tel { font-size: var(--v-t-lg); }
+    .zk { padding: var(--v-5); }
+    .zk__row, .zk__row--time { grid-template-columns: 1fr; }
+  }
+  /* липкая панель на телефоне: написать и позвонить */
+  .dock { display: none; }
+  @media (max-width: 860px) {
+    .dock { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; display: grid; grid-template-columns: 1fr 1fr; gap: var(--v-3); padding: var(--v-3) var(--v-gutter) calc(var(--v-3) + env(safe-area-inset-bottom));
+      background: color-mix(in oklab, var(--v-canvas) 96%, transparent); box-shadow: 0 -1px 0 var(--v-hair); transition: transform .3s var(--v-ease-out); }
+    .dock.is-off { transform: translateY(110%); }
+    .dock .v-btn { min-height: 48px; width: 100%; justify-content: center; }
+  }
+  /* телефон: текст не мельче 15 px; блок в конце, чтобы не перебивался правилами компонентов */
+  @media (max-width: 860px) {
+    .hero__tel, .tier__note, .tier__price small, .kz__hint, .plist .note, .plist .price small, .prices__incl,
+    .promise__facts span, .close__meta, .poka__fig figcaption, .prices__fig figcaption,
+    .promise__fig figcaption, .car__meter, .route__end, .foot, .zk__bubble, .zk__hint { font-size: .95rem; }
+    .bar .v-btn { font-size: .95rem; }
+    .v-label, .tier__class, .close__meta b, .kz__legend, .zk__f > span, .zk__f > legend { font-size: .82rem; }
+  }
+</style>
+</head>
+<body>
+<div class="v-page">
+  <span data-v-progress></span>
+
+  <header class="bar">
+    <div class="bar__left">
+      <a class="bar__mark" href="#top"><i aria-hidden="true"></i>Ваше такси</a>
+      <span class="demo" title="Сайт-образец: название, телефон, цены и ссылки пока слоты">Демо</span>
+    </div>
+    <nav class="bar__right" aria-label="Быстрые ссылки">
+      <a class="bar__tel" href="#zakaz">+7 (XXX) XXX-XX-XX</a>
+      <a class="v-btn" href="#zakaz">Заказать поездку</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- 1 · УЗНАВАНИЕ: ночная трасса, янтарные фары приближаются -->
+    <section id="top" data-v-act="pin" data-v-span="2" data-v-drift="#0b1320" aria-label="Междугороднее такси">
+      <div data-v-stage>
+        <div class="v-layer hero__back" data-v-parallax="-0.7">
+          <picture>
+            <source media="(max-width: 860px)" srcset="assets/hero-m.webp">
+            <img src="assets/hero.webp" alt="" width="1920" height="1080" fetchpriority="high">
+          </picture>
+        </div>
+        <div class="v-layer hero__card" data-v-parallax="-0.25">
+          <picture>
+            <source media="(max-width: 600px)" srcset="assets/card-480.webp" width="480" height="640">
+            <img src="assets/card.webp" alt="" width="900" height="1200" decoding="async">
+          </picture>
+        </div>
+        <div class="hero__scrim" aria-hidden="true"></div>
+        <div class="hero__floor" aria-hidden="true"></div>
+
+        <div class="hero__note" data-v-cue="0 0.8 0 0.12" data-v-rise="0">
+          <span class="v-label">Принимаем заявки</span>
+          <span class="v-nums">XX:XX-XX:XX</span>
+          <span class="hero__int">Подача XX минут</span>
+        </div>
+
+        <div class="v-copy v-copy--lead hero__copy" data-v-cue="0 0.86 0 0.12">
+          <span class="v-label hero__label">Соседний город · аэропорт · вокзал · с багажом и детьми</span>
+          <h1 class="v-display v-display--xl" data-v-kinetic="lines">Такси между городами из вашего города с ценой до выезда</h1>
+          <p class="v-lede">Подтверждаем поездку в мессенджере и подаём машину к назначенному времени. Цена за маршрут называется до выезда и в пути не растёт.</p>
+          <div class="hero__cta">
+            <a class="v-btn" href="#zakaz">Заказать поездку</a>
+            <a class="hero__tel" href="#zakaz">или позвоните <b>+7 (XXX) XXX-XX-XX</b></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2 · УЗНАВАНИЕ и ВЫБОР: куда едем -->
+    <section class="v-section v-section--tight" data-v-act="flow" data-v-drift="#0e1828" id="napravleniya" aria-label="Куда едем">
+      <div class="v-wrap">
+        <div class="poka__head" data-v-in data-v-stagger="70">
+          <h2 class="v-display v-display--lg">Куда едем из вашего города</h2>
+          <p class="v-body v-soft">Найдите свою поездку: под каждую есть машина нужного класса, подача к времени и цена за маршрут до выезда.</p>
+        </div>
+        <ol class="trips" data-v-in data-v-stagger="60">
+          <li><h3>В соседний город</h3><p>Один маршрут из точки А в точку Б. Цена названа до выезда и не меняется в пути.</p></li>
+          <li><h3>В аэропорт</h3><p>Выезжаем с запасом к рейсу: время подачи согласуем с вами заранее и подтверждаем в мессенджере.</p></li>
+          <li><h3>На вокзал</h3><p>К отправлению поезда, с учётом дороги. Время подачи оговариваем в заявке.</p></li>
+          <li><h3>С багажом</h3><p>Чемоданы, коляска, спортинвентарь: скажите заранее, подберём класс, в котором всё поместится.</p></li>
+          <li><h3>С детьми</h3><p>Детское кресло по вашему запросу и остановка по пути, если ребёнку нужно. Обговариваем до выезда.</p></li>
+          <li><h3>Вечером или ночью</h3><p>Подача в согласованное время, в том числе поздно. Ночной тариф называем заранее, а не по приезде.</p></li>
+          <li><h3>В одну сторону или туда-обратно</h3><p>Обратную поездку можно заказать сразу: время подачи и ожидание договариваем вместе с первой.</p></li>
+          <li><h3>Компанией до 4-6 человек</h3><p>Одна машина на всех: минивэн для большой компании или семьи с вещами.</p></li>
+        </ol>
+        <div class="turn" data-v-in data-v-in-self>
+          <span class="v-label">Как считаем</span>
+          <p class="turn__text">Цену за маршрут называем до выезда: по расстоянию, классу машины и времени подачи. В сообщении, а не по приезде.</p>
+        </div>
+      </div>
+      <figure class="poka__fig" data-v-reveal="left" data-v-reveal-at="0.3 0.62">
+        <img src="assets/cargo.webp" alt="Открытый багажник тёмного седана у обочины на закате: чемоданы и дорожная сумка уложены ровно" width="1600" height="900" loading="lazy" decoding="async">
+        <figcaption>Чемоданы и сумки грузим сами: багаж и класс машины обговариваем до выезда</figcaption>
+      </figure>
+    </section>
+
+    <!-- 3 · ВЫБОР: какая машина нужна (фирменный ход: салон заполняется пассажирами и багажом) -->
+    <section data-v-act="pin" data-v-span="2.5" data-v-drift="#0b1320" id="klass" aria-label="Какая машина нужна">
+      <div data-v-stage>
+        <div class="kz">
+          <div class="kz__head" data-v-cue="0 1 0 0" data-v-rise="0">
+            <h2 class="v-display v-display--lg">Сколько вас едет&nbsp;- такая и машина</h2>
+            <p class="v-lede">Назовите, сколько человек и сколько багажа: подберём класс и назовём цену за маршрут до выезда.</p>
+          </div>
+
+          <div class="kz__car">
+            <div class="car" aria-hidden="true">
+              <i class="car__w car__w--f1"></i><i class="car__w car__w--f2"></i><i class="car__w car__w--r1"></i><i class="car__w car__w--r2"></i>
+              <div class="car__body">
+                <i class="car__trunk"></i>
+                <i class="car__glass"></i>
+                <i class="car__lamp car__lamp--a"></i><i class="car__lamp car__lamp--b"></i>
+                <!-- ряд 1 -->
+                <i class="seat" style="--x:18cqw;--y:6cqw"></i><i class="seat" style="--x:18cqw;--y:16.6cqw"></i>
+                <!-- ряд 2 -->
+                <i class="seat" style="--x:31cqw;--y:1.5cqw"></i><i class="seat" style="--x:31cqw;--y:11cqw"></i><i class="seat" style="--x:31cqw;--y:20.5cqw"></i>
+                <!-- ряд 3 (минивэн) -->
+                <i class="seat seat--r3" style="--x:44cqw;--y:1.5cqw"></i><i class="seat seat--r3" style="--x:44cqw;--y:11cqw"></i><i class="seat seat--r3" style="--x:44cqw;--y:20.5cqw"></i>
+                <!-- водитель и пассажиры -->
+                <i class="pax pax--drv" style="--x:18cqw;--y:6cqw"></i>
+                <i class="pax" style="--x:31cqw;--y:1.5cqw;--t:.04"></i>
+                <i class="pax" style="--x:31cqw;--y:20.5cqw;--t:.12"></i>
+                <i class="pax" style="--x:31cqw;--y:11cqw;--t:.2"></i>
+                <i class="pax" style="--x:18cqw;--y:16.6cqw;--t:.42"></i>
+                <i class="pax" style="--x:44cqw;--y:1.5cqw;--t:.7"></i>
+                <i class="pax" style="--x:44cqw;--y:20.5cqw;--t:.8"></i>
+                <!-- багаж -->
+                <i class="bag" style="--x:3cqw;--y:11.5cqw;--t:.06"></i>
+                <i class="bag" style="--x:12.5cqw;--y:11.5cqw;--t:.18"></i>
+                <i class="bag" style="--x:3cqw;--y:3cqw;--t:.4"></i>
+                <i class="bag" style="--x:12.5cqw;--y:20cqw;--t:.5"></i>
+                <i class="bag" style="--x:12.5cqw;--y:3cqw;--t:.74"></i>
+                <i class="bag" style="--x:3cqw;--y:20cqw;--t:.86"></i>
+              </div>
+            </div>
+            <p class="car__meter" aria-hidden="true"><span><b data-pax>0</b>пассажиров</span><span><b data-bag>0</b>мест багажа</span></p>
+            <p class="kz__legend">Салон условный: класс подбираем по вашему числу людей и багажа</p>
+          </div>
+
+          <div class="kz__tiers">
+            <div class="tier" data-v-cue="0 0.36 0 0.04">
+              <span class="tier__class"><i aria-hidden="true"></i>Стандарт</span>
+              <h3>Одному, паре или втроём</h3>
+              <p class="tier__note">Для обычной поездки без большой компании. <b>До 3 пассажиров и 2 мест багажа.</b></p>
+              <div class="tier__price"><span><b class="v-nums">Х ХХХ руб.</b><small>за маршрут, цена до выезда</small></span></div>
+            </div>
+            <div class="tier" data-v-cue="0.32 0.69 0.04 0.04">
+              <span class="tier__class"><i aria-hidden="true"></i>Комфорт</span>
+              <h3>Больше места и вещей</h3>
+              <p class="tier__note">Когда вас четверо или в дорогу берёте много багажа. <b>До 4 пассажиров и 4 мест багажа.</b></p>
+              <div class="tier__price"><span><b class="v-nums">Х ХХХ руб.</b><small>за маршрут, цена до выезда</small></span></div>
+            </div>
+            <div class="tier" data-v-cue="0.65 1 0.04 0">
+              <span class="tier__class"><i aria-hidden="true"></i>Минивэн</span>
+              <h3>Компания или семья с вещами</h3>
+              <p class="tier__note">Одна машина на всех и на весь багаж. <b>До 6 пассажиров и 6 мест багажа.</b></p>
+              <div class="tier__price"><span><b class="v-nums">Х ХХХ руб.</b><small>за маршрут, цена до выезда</small></span></div>
+            </div>
+          </div>
+
+          <div class="kz__after" data-v-cue="0.7 1 0.06 0">
+            <a class="v-btn" href="#zakaz">Заказать поездку</a>
+            <span class="kz__hint">Не уверены, какой класс нужен - напишите, сколько вас и что с собой, подберём сами</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 · ВЫБОР: что в цене -->
+    <section class="v-section" data-v-act="flow" data-v-drift="#0e1828" id="ceny" aria-label="Что в цене">
+      <div class="v-wrap prices">
+        <div class="v-stack" data-v-in data-v-stagger="60">
+          <h2 class="v-display v-display--lg">Что в цене, а что отдельно</h2>
+          <p class="v-body v-soft">Цена за маршрут складывается из расстояния, класса машины и времени подачи. Дополнительные услуги называем сразу, в одном сообщении.</p>
+          <ul class="plist">
+            <li><span class="name">Багаж</span><span class="note">Чемоданы и сумки по числу мест класса. Крупный или негабаритный груз обговариваем до выезда</span><span class="price v-nums">Х ХХХ руб.<small>точную цену называем до выезда</small></span></li>
+            <li><span class="name">Детское кресло</span><span class="note">Нужный размер подбираем по возрасту и росту ребёнка, ставим до подачи</span><span class="price v-nums">Х ХХХ руб.<small>точную цену называем до выезда</small></span></li>
+            <li><span class="name">Остановка по пути</span><span class="note">Кафе, заправка, детская пауза: заранее скажите, сколько нужно времени</span><span class="price v-nums">Х ХХХ руб.<small>точную цену называем до выезда</small></span></li>
+            <li><span class="name">Ожидание</span><span class="note">Если нужно подождать на месте: как долго входит в цену и сколько стоит дальше, знаете до выезда</span><span class="price v-nums">Х ХХХ руб.<small>точную цену называем до выезда</small></span></li>
+            <li><span class="name">Ночной тариф</span><span class="note">Поздно вечером и ночью, если это отличается от дневной цены. Называем в сообщении, не по приезде</span><span class="price v-nums">Х ХХХ руб.<small>точную цену называем до выезда</small></span></li>
+          </ul>
+          <p class="prices__incl"><b>В сообщении до выезда:</b> маршрут, класс машины, время подачи, цена за маршрут и стоимость всего, что вы выбрали. Итоговая сумма та же, что названа заранее.</p>
+        </div>
+        <figure class="prices__fig">
+          <img src="assets/load.webp" srcset="assets/load-900.webp 900w, assets/load.webp 1600w" sizes="(max-width: 860px) 100vw, 30vw" alt="Заднее сиденье автомобиля: детское кресло, рюкзак и сложенный плед в тёплом свете уличного фонаря" width="1600" height="900" loading="lazy" decoding="async" data-v-parallax="-0.3">
+          <figcaption>Детское кресло ставим до подачи, по вашему запросу</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- 5 · ДОКАЗАТЕЛЬСТВО: дорога, три реплики -->
+    <section data-v-act="pin" data-v-span="2" data-v-drift="#0a111c" id="doroga" aria-label="Как проходит поездка">
+      <div data-v-stage>
+        <div class="v-layer road__img" data-v-parallax="-0.5">
+          <img src="assets/road.webp" alt="" width="1920" height="1080" loading="lazy" decoding="async">
+        </div>
+        <div class="road__scrim" aria-hidden="true"></div>
+        <div class="v-copy v-copy--top road__copy" data-v-cue="0 0.32 0 0.05">
+          <span class="v-label">Подтверждение</span>
+          <h2 class="v-display v-display--lg">Маршрут, класс и цена&nbsp;- в сообщении до выезда</h2>
+          <p class="v-lede">Одно сообщение в мессенджере: куда едем, какая машина, во сколько подача и сколько стоит. Согласны - поездка подтверждена.</p>
+        </div>
+        <div class="v-copy v-copy--top road__copy" data-v-cue="0.3 0.68 0.05 0.05">
+          <span class="v-label">Подача машины</span>
+          <h2 class="v-display v-display--lg">К назначенному времени: XX минут</h2>
+          <p class="v-lede">Машина подаётся нужного класса, к оговорённому часу. Если что-то идёт не так - предупреждаем заранее, а не «уже едем».</p>
+        </div>
+        <div class="v-copy v-copy--top road__copy" data-v-cue="0.66 1 0.05 0">
+          <span class="v-label">В пути</span>
+          <h2 class="v-display v-display--lg">Цена не растёт: сумма та же, что в сообщении</h2>
+          <p class="v-lede">Остановки и ожидание, о которых договорились, уже в цене. Новых условий по дороге не появляется.</p>
+        </div>
+        <div class="route" aria-hidden="true">
+          <span class="route__end route__end--a">А</span>
+          <span class="route__end route__end--b">Б</span>
+          <div class="route__track">
+            <div class="route__line"></div>
+            <div class="mini"><span class="mini__body"></span><span class="mini__roof"></span><span class="mini__lamp"></span><i></i><i></i></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6 · ОБЕЩАНИЕ: приехали -->
+    <section class="v-section" data-v-act="flow" data-v-drift="#0b1320" id="pribytie" aria-label="Приехали">
+      <div class="v-wrap promise">
+        <div class="v-stack" data-v-in data-v-stagger="70">
+          <h2 class="v-display v-display--md">Приехали: всё, как договаривались</h2>
+          <ul class="promise__facts">
+            <li><strong>Встретим у подъезда по договорённости</strong><span>Место подачи и время называете вы, мы подтверждаем их в сообщении до выезда.</span></li>
+            <li><strong>Цена та же, что названа до выезда</strong><span>По договорённости итоговая сумма не меняется: остановки и ожидание, о которых договорились, уже учтены.</span></li>
+            <li><strong>Поможем с багажом по договорённости</strong><span>Погрузим чемоданы и поможем донести до подъезда или входа. Скажите заранее, что и сколько.</span></li>
+            <li><strong>Чек по запросу</strong><span>Нужен чек или подтверждение поездки - скажите при заказе, оформим по договорённости.</span></li>
+          </ul>
+        </div>
+        <figure class="promise__fig" data-v-reveal="left" data-v-reveal-at="0.15 0.5">
+          <img src="assets/done.webp" srcset="assets/done-900.webp 900w, assets/done.webp 1600w" sizes="(max-width: 860px) 100vw, 46vw" alt="Въезд в город ранним утром: мокрая улица, тёплые окна жилых домов, янтарные фонари" width="1600" height="900" loading="lazy" decoding="async">
+          <figcaption>Въезд в город: подача у нужного подъезда, как договорились</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- 7 · ДЕЙСТВИЕ: заявка, форма собирает сообщение -->
+    <section data-v-act="flow" data-v-drift="#0e1828" id="zakaz" aria-label="Заказать поездку">
+      <div class="close" data-v-spotlight>
+        <div class="close__inner">
+          <div data-v-in data-v-stagger="80">
+            <h2 class="v-display v-display--lg">Назовите маршрут&nbsp;- цену назовём до выезда</h2>
+            <p class="v-lede">Заполните поездку: соберём готовое сообщение, скопируем и откроем мессенджер. Подтвердим цену и подачу там же.</p>
+            <a class="close__tel" href="#zakaz">+7 (XXX) XXX-XX-XX</a>
+            <div class="close__meta">
+              <span><b>Принимаем заявки</b>XX:XX-XX:XX</span>
+              <span><b>Подача</b>XX минут</span>
+              <span><b>Город</b>ваш город</span>
+            </div>
+          </div>
+
+          <form class="zk" data-zk novalidate data-v-in data-v-in-self>
+            <div class="zk__row">
+              <label class="zk__f"><span>Откуда</span><input type="text" name="from" autocomplete="off" placeholder="Адрес или район"></label>
+              <label class="zk__f"><span>Куда</span><input type="text" name="to" autocomplete="off" placeholder="Город, аэропорт или вокзал"></label>
+            </div>
+            <fieldset class="zk__f"><legend>День</legend><div class="zk__chips" data-days></div></fieldset>
+            <div class="zk__row zk__row--time">
+              <label class="zk__f"><span>Во сколько</span><input type="time" name="time" step="300"></label>
+              <fieldset class="zk__f"><legend>Сколько человек</legend>
+                <div class="zk__chips" role="radiogroup">
+                  <label class="opt"><input type="radio" name="pax" value="1"><span>1</span></label>
+                  <label class="opt"><input type="radio" name="pax" value="2" checked><span>2</span></label>
+                  <label class="opt"><input type="radio" name="pax" value="3"><span>3</span></label>
+                  <label class="opt"><input type="radio" name="pax" value="4"><span>4</span></label>
+                  <label class="opt"><input type="radio" name="pax" value="5"><span>5</span></label>
+                  <label class="opt"><input type="radio" name="pax" value="6"><span>6</span></label>
+                </div>
+              </fieldset>
+            </div>
+            <fieldset class="zk__f"><legend>Багаж и дети</legend>
+              <div class="zk__chips">
+                <label class="opt"><input type="radio" name="bag" value="без багажа"><span>Без багажа</span></label>
+                <label class="opt"><input type="radio" name="bag" value="1-2 места" checked><span>1-2 места</span></label>
+                <label class="opt"><input type="radio" name="bag" value="3-4 места"><span>3-4 места</span></label>
+                <label class="opt"><input type="radio" name="bag" value="много или негабарит"><span>Много или негабарит</span></label>
+                <label class="opt"><input type="checkbox" name="seat"><span>Детское кресло</span></label>
+              </div>
+            </fieldset>
+            <div class="zk__bubble" data-bubble aria-live="polite"></div>
+            <div class="zk__send">
+              <button type="button" class="v-btn" data-send="wa" data-link="{{ссылка-whatsapp}}">Отправить в WhatsApp</button>
+              <button type="button" class="v-btn v-btn--ghost" data-send="tg" data-link="{{ссылка-telegram}}">Отправить в Telegram</button>
+            </div>
+            <p class="zk__hint" data-hint hidden></p>
+          </form>
+        </div>
+        <footer class="foot">
+          <span>Ваше такси</span>
+          <span>Реквизиты - после согласования</span>
+        </footer>
+      </div>
+    </section>
+
+  </main>
+
+  <div class="dock" data-dock>
+    <a class="v-btn" href="#zakaz" data-msg-link="{{ссылка-telegram}}">Написать</a>
+    <a class="v-btn v-btn--ghost" href="#zakaz">Позвонить</a>
+  </div>
+</div>
+
+<script src="vibe.js"></script>
+<script>
+  // На телефоне пины короче: data-v-span из CSS не поменять, правим атрибут до монтирования.
+  if (window.matchMedia('(max-width: 860px)').matches) {
+    document.getElementById('top').setAttribute('data-v-span', '1.6');
+    document.getElementById('klass').setAttribute('data-v-span', '2.2');
+    document.getElementById('doroga').setAttribute('data-v-span', '1.8');
+  }
+  Vibe.mount(document.querySelector('.v-page'));
+
+  // Шапка: плотная подложка 96% после 8 px прокрутки.
+  (function () {
+    var bar = document.querySelector('.bar'), on = null;
+    function tick() { var s = window.scrollY > 8; if (s !== on) { on = s; bar.classList.toggle('is-scrolled', s); } }
+    window.addEventListener('scroll', tick, { passive: true }); tick();
+  })();
+
+  // Фирменный ход: пассажиров и багаж ведёт CSS от --v-p; скрипт только считает, сколько уже в машине.
+  (function () {
+    var act = document.getElementById('klass'), outP = act.querySelector('[data-pax]'), outB = act.querySelector('[data-bag]');
+    var tp = [].map.call(act.querySelectorAll('.pax:not(.pax--drv)'), function (e) { return parseFloat(e.style.getPropertyValue('--t')); });
+    var tb = [].map.call(act.querySelectorAll('.bag'), function (e) { return parseFloat(e.style.getPropertyValue('--t')); });
+    var lastP = -1, lastB = -1, live = false;
+    function count(a, p) { var n = 0; a.forEach(function (t) { if (p >= t + 0.04) n++; }); return n; }
+    function tick() {
+      var p = parseFloat(getComputedStyle(act).getPropertyValue('--v-p')) || 0;
+      var a = count(tp, p), b = count(tb, p);
+      if (a !== lastP) { lastP = a; outP.textContent = a; }
+      if (b !== lastB) { lastB = b; outB.textContent = b; }
+      if (live) requestAnimationFrame(tick);
+    }
+    new IntersectionObserver(function (es) { live = es[0].isIntersecting; if (live) tick(); }).observe(act);
+    tick();
+  })();
+
+  // Ссылки мессенджеров: слот ссылки лежит в data-атрибуте, пока он не заполнен, кнопка ведёт к форме.
+  function realLink(v) { return /^(https?:\/\/|tg:)/.test(v || '') ? v : ''; }
+  (function () {
+    document.querySelectorAll('[data-msg-link]').forEach(function (a) {
+      var l = realLink(a.getAttribute('data-msg-link'));
+      if (l) { a.href = l; a.target = '_blank'; a.rel = 'noopener'; }
+    });
+    // липкая панель уходит, когда на экране форма
+    var dock = document.querySelector('[data-dock]'), z = document.getElementById('zakaz');
+    if (dock && z && 'IntersectionObserver' in window) new IntersectionObserver(function (es) { dock.classList.toggle('is-off', es[0].isIntersecting); }, { threshold: .15 }).observe(z);
+  })();
+
+  // Форма поездки: собирает сообщение, копирует его и открывает мессенджер (если ссылка подключена).
+  (function () {
+    var form = document.querySelector('[data-zk]'); if (!form) return;
+    var bubble = form.querySelector('[data-bubble]'), hint = form.querySelector('[data-hint]');
+    var daysBox = form.querySelector('[data-days]');
+    var RU_D = ['вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб'], RU_M = ['янв', 'фев', 'мар', 'апр', 'мая', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'];
+    var days = [], now = new Date();
+    for (var i = 0; i < 7; i++) {
+      var d = new Date(now); d.setDate(now.getDate() + i);
+      var short = d.getDate() + ' ' + RU_M[d.getMonth()];
+      days.push({ label: i === 0 ? 'Сегодня' : i === 1 ? 'Завтра' : RU_D[d.getDay()] + ', ' + short, msg: i === 0 ? 'сегодня' : i === 1 ? 'завтра' : short });
+    }
+    daysBox.innerHTML = days.map(function (x, i) { return '<label class="opt"><input type="radio" name="day" value="' + i + '"' + (i === 0 ? ' checked' : '') + '><span>' + x.label + '</span></label>'; }).join('');
+    function v(n) { var e = form.querySelector('[name="' + n + '"]'); return e ? e.value.trim() : ''; }
+    function checked(n) { var e = form.querySelector('[name="' + n + '"]:checked'); return e ? e.value : ''; }
+    function text() {
+      var from = v('from') || '[откуда]', to = v('to') || '[куда]', t = v('time');
+      var day = days[+checked('day') || 0].msg;
+      var s = 'Здравствуйте! Хочу заказать поездку.\n' +
+        'Откуда: ' + from + '\nКуда: ' + to + '\n' +
+        'Когда: ' + day + (t ? ', в ' + t : ', время уточню') + '\n' +
+        'Пассажиров: ' + checked('pax') + ', багаж: ' + checked('bag') + (form.querySelector('[name="seat"]').checked ? ', нужно детское кресло' : '') + '.\n' +
+        'Назовите, пожалуйста, цену за маршрут и подтвердите подачу.';
+      return s;
+    }
+    function update() { bubble.textContent = text(); }
+    form.addEventListener('input', update); form.addEventListener('change', update); update();
+    function copy(t) {
+      if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(t);
+      return new Promise(function (ok, no) {
+        var ta = document.createElement('textarea'); ta.value = t; ta.style.cssText = 'position:fixed;opacity:0'; document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy') ? ok() : no(); } catch (e) { no(); } ta.remove();
+      });
+    }
+    function say(html) { hint.innerHTML = html; hint.hidden = false; }
+    form.querySelectorAll('[data-send]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var ok = true;
+        ['from', 'to'].forEach(function (n) { var e = form.querySelector('[name="' + n + '"]'); var bad = !e.value.trim(); e.classList.toggle('is-bad', bad); if (bad && ok) { e.focus(); ok = false; } });
+        if (!ok) { say('Укажите, откуда и куда едем: без этого сообщение не собрать.'); return; }
+        update();
+        var t = bubble.textContent, link = realLink(btn.getAttribute('data-link')), wa = btn.getAttribute('data-send') === 'wa';
+        copy(t).then(function () {
+          if (link) say('<b>Сообщение скопировано.</b> Открываем мессенджер: если текст не подставился, вставьте его в чат.');
+          else say('<b>Сообщение скопировано.</b> Ссылка на мессенджер пока не подключена: вставьте текст в чат вручную.');
+        }, function () { say('Не удалось скопировать автоматически: выделите текст выше и скопируйте вручную.'); });
+        if (link) window.open(wa ? link + (link.indexOf('?') > -1 ? '&' : '?') + 'text=' + encodeURIComponent(t) : link, '_blank', 'noopener');
+      });
+    });
+    form.addEventListener('input', function (e) { if (e.target.classList && e.target.classList.contains('is-bad')) e.target.classList.remove('is-bad'); });
+  })();
+</script>
+</body>
+</html>
